@@ -61,13 +61,6 @@ public class App {
 			municipio.setNome(element.getElementsByTagName("SimpleData").item(0).getTextContent());
 			municipio.setCodigo(element.getElementsByTagName("SimpleData").item(1).getTextContent());
 			municipio.setPoligonos(element.getElementsByTagName("coordinates").item(0).getTextContent());
-			//element.getAttribute("");
-			//List<Element> list = XmlUtils.getElements(element, "ExtendedData");
-			//System.out.println(list);
-			//municipio.setNome(getTagValue("SimpleData name=\"", element));
-
-			//municipio.setCodigo(Integer.parseInt((getTagValue("CD_GEOCMU", element))));
-			//municipio.setPoligonos(getTagValue("Polygon", element));
 		}
 
 		return municipio;

@@ -6,25 +6,25 @@ import java.util.List;
 public class Municipio {
 	
 	String nome;
-	int codigo;
-	List<Poligono> poligonos;
+	String codigo;
+	String poligonos;
 	
 	public Municipio() {
 		
 		this.nome = "";
-		this.codigo = 0;
-		this.poligonos = new ArrayList<Poligono>();
+		this.codigo = "";
+		this.poligonos = ""; //new ArrayList<Poligono>();
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
-	public void setPoligonos(List<Poligono> poligonos) {
+	public void setPoligonos(String poligonos) {
 		this.poligonos = poligonos;
 	}
 
@@ -32,11 +32,11 @@ public class Municipio {
 		return nome;
 	}
 
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public List<Poligono> getPoligonos() {
+	public String getPoligonos() {
 		return poligonos;
 	}
 }

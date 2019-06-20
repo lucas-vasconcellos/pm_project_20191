@@ -24,7 +24,7 @@ import pm.projetofinal.pm_project.Utils.XmlUtils;
  */
 public class App {
 	public static void main(String[] args) throws ParserConfigurationException, SAXException {
-		String filePath = "C:\\Users\\Brouck\\Desktop\\51MUE250GC_SIR.shp.kml";
+		String filePath = "C:\\Users\\Brouck\\Desktop\\12MUE250GC_SIR.kml";
 		File xmlFile = new File(filePath);
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
@@ -34,6 +34,8 @@ public class App {
 			doc.getDocumentElement().normalize();
 			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 			NodeList nodeList = doc.getElementsByTagName("Placemark");
+			System.out.println(nodeList.getLength());
+
 			// now XML is loaded as Document in memory, lets convert it to
 			// Object List
 			List<Municipio> listaMunicipio = new ArrayList<Municipio>();
@@ -42,7 +44,7 @@ public class App {
 			}
 			// lets print Employee list information
 			for (Municipio municipio : listaMunicipio) {
-				System.out.println(municipio.toString());
+				System.out.println("Nome:" + municipio.getNome() + "\n Codigo:" + municipio.getCodigo() + "\n Coordenadas:" + municipio.getPoligonos() + "\n");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -55,21 +57,19 @@ public class App {
 		Municipio municipio = new Municipio();
 		if (node.getNodeType() == Node.ELEMENT_NODE) {
 			Element element = (Element) node;
-			List<Element> list = XmlUtils.getElements(element, "ExtendedData");
-			String obj =  getTagValue("ExtendedData", element).toString();
-			municipio.setNome(getTagValue("SimpleData name=\"", element));
-			System.out.println(obj);
+			
+			municipio.setNome(element.getElementsByTagName("SimpleData").item(0).getTextContent());
+			municipio.setCodigo(element.getElementsByTagName("SimpleData").item(1).getTextContent());
+			municipio.setPoligonos(element.getElementsByTagName("coordinates").item(0).getTextContent());
+			//element.getAttribute("");
+			//List<Element> list = XmlUtils.getElements(element, "ExtendedData");
+			//System.out.println(list);
+			//municipio.setNome(getTagValue("SimpleData name=\"", element));
 
 			//municipio.setCodigo(Integer.parseInt((getTagValue("CD_GEOCMU", element))));
-			// municipio.setPoligonos(getTagValue("Polygon", element));
+			//municipio.setPoligonos(getTagValue("Polygon", element));
 		}
 
 		return municipio;
-	}
-
-	private static String getTagValue(String tag, Element element) {
-		NodeList nodeList = element.getElementsByTagName(tag).item(0).getChildNodes();
-		Node node = (Node) nodeList.item(0);
-		return node.getNodeValue();
 	}
 }

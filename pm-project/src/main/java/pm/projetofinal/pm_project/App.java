@@ -36,13 +36,10 @@ public class App {
 			NodeList nodeList = doc.getElementsByTagName("Placemark");
 			System.out.println(nodeList.getLength());
 
-			// now XML is loaded as Document in memory, lets convert it to
-			// Object List
 			List<Municipio> listaMunicipio = new ArrayList<Municipio>();
 			for (int i = 0; i < nodeList.getLength(); i++) {
 				listaMunicipio.add(getMunicipio(nodeList.item(i)));
 			}
-			// lets print Employee list information
 			for (Municipio municipio : listaMunicipio) {
 				System.out.println("Nome:" + municipio.getNome() + "\n Codigo:" + municipio.getCodigo() + "\n Coordenadas:" + municipio.getPoligonos() + "\n");
 			}
@@ -53,7 +50,6 @@ public class App {
 	}
 
 	private static Municipio getMunicipio(Node node) {
-		// XMLReaderDOM domReader = new XMLReaderDOM();
 		Municipio municipio = new Municipio();
 		if (node.getNodeType() == Node.ELEMENT_NODE) {
 			Element element = (Element) node;

@@ -17,13 +17,12 @@ import org.xml.sax.SAXException;
 
 import pm.projetofinal.pm_project.Model.Municipio;
 import pm.projetofinal.pm_project.Service.BoundingBoxGenerator;
-import pm.projetofinal.pm_project.Utils.XmlUtils;
 
 public class App {
 	static BoundingBoxGenerator boundingBoxGenerator = new BoundingBoxGenerator();
 
 	public static void main(String[] args) throws ParserConfigurationException, SAXException {
-		String filePath = "C:\\Users\\Brouck\\Desktop\\33MUE250GC_SIR.kml";
+		String filePath = "C:\\Users\\Brouck\\Desktop\\12MUE250GC_SIR.kml";
 		File xmlFile = new File(filePath);
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
@@ -52,20 +51,12 @@ public class App {
 	public static Municipio getMunicipio(Node node) {
 		Municipio municipio = new Municipio();
 		if (node.getNodeType() == Node.ELEMENT_NODE) {
-
 			Element element = (Element) node;
-			NodeList polygonList = element.getElementsByTagName("Polygon");
-			String coords = "";
-
-			for (int i = 0; i < polygonList.getLength(); i++) {
-				Element polygon = (Element) polygonList.item(i);
-				String coord = polygon.getElementsByTagName("coordinates").item(0).getTextContent();
-				coords = coords + coord;
-			}
+			String coordinates = boundingBoxGenerator.getCoordinatesString(element);
 
 			municipio.setNome(element.getElementsByTagName("SimpleData").item(0).getTextContent());
 			municipio.setCodigo(element.getElementsByTagName("SimpleData").item(1).getTextContent());
-			municipio.setBoundingBox(boundingBoxGenerator.generateBoundingBox(coords));
+			municipio.setBoundingBox(boundingBoxGenerator.generateBoundingBox(coordinates));
 		}
 
 		return municipio;

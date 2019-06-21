@@ -3,6 +3,9 @@ package pm.projetofinal.pm_project.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
 import pm.projetofinal.pm_project.Model.BoundingBox;
 
 public class BoundingBoxGenerator {
@@ -41,5 +44,18 @@ public class BoundingBoxGenerator {
 		boundingBox.setMaxLong(longitudes.get(0));
 
 		return boundingBox;
+	}
+
+	public String getCoordinatesString(Element element) {
+		NodeList polygonList = element.getElementsByTagName("Polygon");
+		String coordinates = "";
+
+		for (int i = 0; i < polygonList.getLength(); i++) {
+			Element polygon = (Element) polygonList.item(i);
+			String coord = polygon.getElementsByTagName("coordinates").item(0).getTextContent();
+			coordinates = coordinates + coord;
+		}
+
+		return coordinates;
 	}
 }

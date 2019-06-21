@@ -3,7 +3,7 @@ package pm.projetofinal.pm_project.Model;
 public class Municipio {
 	String nome;
 	String codigo;
-	String poligonos;
+	String uf;
 	BoundingBox boundingBox;
 
 	public String getNome() {
@@ -22,12 +22,12 @@ public class Municipio {
 		this.codigo = codigo;
 	}
 
-	public String getPoligonos() {
-		return poligonos;
+	public String getuf() {
+		return uf;
 	}
 
-	public void setPoligonos(String poligonos) {
-		this.poligonos = poligonos;
+	public void setuf(String uf) {
+		this.uf = uf;
 	}
 
 	public BoundingBox getBoundingBox() {

@@ -46,8 +46,8 @@ public class BoundingBoxGenerator {
 		return boundingBox;
 	}
 
-	public String getCoordinatesString(Element element) {
-		NodeList polygonList = element.getElementsByTagName("Polygon");
+	public String getCoordinatesString(Element placemark) {
+		NodeList polygonList = placemark.getElementsByTagName("Polygon");
 		String coordinates = "";
 
 		for (int i = 0; i < polygonList.getLength(); i++) {

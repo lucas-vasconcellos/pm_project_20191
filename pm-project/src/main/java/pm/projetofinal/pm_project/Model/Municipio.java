@@ -1,42 +1,40 @@
 package pm.projetofinal.pm_project.Model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Municipio {
-	
 	String nome;
 	String codigo;
 	String poligonos;
-	
-	public Municipio() {
-		
-		this.nome = "";
-		this.codigo = "";
-		this.poligonos = ""; //new ArrayList<Poligono>();
+	BoundingBox boundingBox;
+
+	public String getNome() {
+		return nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	public String getCodigo() {
+		return codigo;
+	}
+
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
+	}
+
+	public String getPoligonos() {
+		return poligonos;
 	}
 
 	public void setPoligonos(String poligonos) {
 		this.poligonos = poligonos;
 	}
 
-	public String getNome() {
-		return nome;
+	public BoundingBox getBoundingBox() {
+		return boundingBox;
 	}
 
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public String getPoligonos() {
-		return poligonos;
+	public void setBoundingBox(BoundingBox boundingBox) {
+		this.boundingBox = boundingBox;
 	}
 }

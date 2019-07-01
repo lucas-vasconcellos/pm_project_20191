@@ -39,8 +39,14 @@ public class BoundingBox {
 		this.minLong = minLong;
 	}
 
-	public String toString(){
-		String boundingBoxString = String.format("maxLat: %f \n maxLong: %f \n minLat: %f \n minLong: %f", this.maxLat, this.maxLong, this.minLat, this.minLong);
+	public String getStringForOverpass() {
+		String response = String.format("%.14f,%.14f,%.14f,%.14f", this.getMinLat(), this.getMinLong(), this.getMaxLat(),this.getMaxLong());
+		return response;
+	}
+
+	public String toString() {
+		String boundingBoxString = String.format("maxLat: %f \n maxLong: %f \n minLat: %f \n minLong: %f", this.maxLat,
+				this.maxLong, this.minLat, this.minLong);
 		return boundingBoxString;
 	}
 }

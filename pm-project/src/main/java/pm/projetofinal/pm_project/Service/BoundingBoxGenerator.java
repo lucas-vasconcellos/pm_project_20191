@@ -12,7 +12,7 @@ public class BoundingBoxGenerator {
 
 	public BoundingBox generateBoundingBox(String coordString) {
 
-		String[] arrayLatLong = coordString.split(",0");
+		String[] arrayLatLong = coordString.split(",0 ");
 
 		ArrayList<Double> latitudes = new ArrayList<Double>();
 		ArrayList<Double> longitudes = new ArrayList<Double>();
@@ -38,10 +38,10 @@ public class BoundingBoxGenerator {
 		int qtdLongitudesForArray = longitudes.size() - 1;
 
 		BoundingBox boundingBox = new BoundingBox();
-		boundingBox.setMinLat(latitudes.get(qtdLatitudesForArray));
-		boundingBox.setMinLong(longitudes.get(qtdLongitudesForArray));
-		boundingBox.setMaxLat(latitudes.get(0));
-		boundingBox.setMaxLong(longitudes.get(0));
+		boundingBox.setMaxLat(latitudes.get(qtdLatitudesForArray));
+		boundingBox.setMaxLong(longitudes.get(qtdLongitudesForArray));
+		boundingBox.setMinLat(latitudes.get(0));
+		boundingBox.setMinLong(longitudes.get(0));
 
 		return boundingBox;
 	}

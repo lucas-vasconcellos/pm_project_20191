@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -14,8 +13,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -77,39 +74,5 @@ public class App {
 			e.printStackTrace();
 		}
 
-	}
-
-	public static void generateCsv(List<BoundingBox> boundingBoxes, String filePath) {
-
-		File file = new File(filePath);
-		try {
-			if (file.exists()) {
-				boolean existe = true;
-			}
-			ArrayList<String[]> csvData = new ArrayList<String[]>();
-			// create FileWriter object with file as parameter
-			FileWriter outputfile = new FileWriter(file);
-
-			// create CSVWriter object filewriter object as parameter
-			CSVWriter writer = new CSVWriter(outputfile);
-
-			// adding header to csv
-			String[] header = { "Name", "Class", "Marks" };
-			writer.writeNext(header);
-
-			// add data to csv
-			for (BoundingBox boundingBox : boundingBoxes) {
-				// String.format("", );
-			}
-			String[] data1 = { "Aman", "10", "620" };
-			writer.writeNext(data1);
-			String[] data2 = { "Suraj", "10", "630" };
-			writer.writeNext(data2);
-
-			// closing writer connection
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }

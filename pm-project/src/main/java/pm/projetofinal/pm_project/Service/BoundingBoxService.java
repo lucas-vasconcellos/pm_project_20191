@@ -8,7 +8,7 @@ import org.w3c.dom.NodeList;
 
 import pm.projetofinal.pm_project.Model.BoundingBox;
 
-public class BoundingBoxGenerator {
+public class BoundingBoxService {
 
 	public BoundingBox generateBoundingBox(String coordString) {
 
@@ -57,5 +57,13 @@ public class BoundingBoxGenerator {
 		}
 
 		return coordinates;
+	}
+	
+	public BoundingBox getBoundingBox(String municipio, boolean isCode){
+		
+		
+		
+		
+		return new BoundingBox();
 	}
 }

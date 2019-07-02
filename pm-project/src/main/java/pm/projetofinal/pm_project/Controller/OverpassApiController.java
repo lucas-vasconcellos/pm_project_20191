@@ -14,7 +14,7 @@ public class OverpassApiController {
 
 	private static final String OVERPASS_API = "https://overpass-api.de/api/map?bbox=";
 
-	public Document getOverpassApiXml(String parameters)
+	public static Document getOverpassApiXml(String parameters)
 			throws IOException, SAXException, ParserConfigurationException {
 
 		String finalUrlString = OVERPASS_API + parameters;

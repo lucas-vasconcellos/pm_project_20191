@@ -67,5 +67,6 @@ public class MunicipioService
 		}
 		System.out.println( "Município não encontrado" );
 		System.exit( 0 );
+		return new Municipio();
 	}
 }

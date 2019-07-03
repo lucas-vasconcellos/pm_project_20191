@@ -40,6 +40,7 @@ public class App
 		String uf = "";
 		boolean isCode = true;
 		String entryMunicipio = "";
+		String nomeMunicipio = "";
 		final BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ) );
 
 		try
@@ -54,13 +55,16 @@ public class App
 			}
 			else
 			{
-				uf = entryMunicipio.split( "-" )[1];
+				final String[] splitEntry = entryMunicipio.split( "-" );
+				uf = splitEntry[1];
+				nomeMunicipio = splitEntry[0];
 				isCode = false;
 			}
 		}
-		catch ( final IOException e1 )
+		catch ( final Exception e )
 		{
-			System.out.println( "Informação inválida foi inserida." );
+			System.out.println( "Informação inválida foi inserida. O formato correto é municipio-UF ou o código." );
+			System.exit( 0 );
 		}
 
 		final String filePath = String.format( "src\\kml\\%s.kml", uf );

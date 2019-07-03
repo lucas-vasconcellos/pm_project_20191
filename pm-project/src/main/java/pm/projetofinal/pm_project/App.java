@@ -2,7 +2,6 @@ package pm.projetofinal.pm_project;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -40,7 +39,6 @@ public class App
 		String uf = "";
 		boolean isCode = true;
 		String entryMunicipio = "";
-		String nomeMunicipio = "";
 		final BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ) );
 
 		try
@@ -55,9 +53,8 @@ public class App
 			}
 			else
 			{
-				final String[] splitEntry = entryMunicipio.split( "-" );
-				uf = splitEntry[1];
-				nomeMunicipio = splitEntry[0];
+				uf = entryMunicipio.split( "-" )[1];
+
 				isCode = false;
 			}
 		}
@@ -75,8 +72,11 @@ public class App
 
 			final NodeList nodeList = domService.getNodeListFromFile( xmlFile, MUNICIPIO_KML_TAG );
 			final Municipio municipio = municipioService.getMunicipioFromNodeList( nodeList, entryMunicipio, isCode );
-			final BoundingBox boundingBox = municipio.getBoundingBox();
-			final Document overPassResponse = overpassService.getOverpassDocument( boundingBox );
+			if ( municipio != null )
+			{
+				final BoundingBox boundingBox = municipio.getBoundingBox();
+				final Document overPassResponse = overpassService.getOverpassDocument( boundingBox );
+			}
 
 			// TODO utilizar o document para buscar os dados e montar a exibição.
 			// https://wiki.openstreetmap.org/wiki/Map_Features#Highway
@@ -84,7 +84,7 @@ public class App
 			// System.out.println(nodeList2.getLength());
 
 		}
-		catch ( final IOException e )
+		catch ( final Exception e )
 		{
 			System.out.println( "Houve um problema com a requisição." );
 		}

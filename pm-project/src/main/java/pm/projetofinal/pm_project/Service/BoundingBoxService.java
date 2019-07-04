@@ -31,7 +31,7 @@ public class BoundingBoxService
 	 * Tag utilizada para buscar um polígno num arquivo .kml Field <code>POLYGON_TAG</code>
 	 * </p>
 	 */
-	public static final String POLYGON_TAG = "polygon";
+	public static final String POLYGON_TAG = "Polygon";
 
 	/**
 	 * <p>
@@ -84,7 +84,7 @@ public class BoundingBoxService
 	 * <p>
 	 * Obtem uma string com as coordenadas de um polígono de um arquivo .kml
 	 * </p>
-	 * 
+	 *
 	 * @param placemark
 	 * @return
 	 */

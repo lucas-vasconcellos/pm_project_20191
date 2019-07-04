@@ -12,7 +12,12 @@ import pm.projetofinal.pm_project.Service.DomService;
 
 
 public class DomServiceTest {
-
+	/**
+	 * Teste do método que fera um Document a partir de um File no caso de sucesso
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	@Test
 	public void testGetDocumentFromFileSuccess() throws ParserConfigurationException, SAXException, IOException
 	{
@@ -27,6 +32,12 @@ public class DomServiceTest {
         Assert.assertEquals(isInstanceOfDocument, resultadoEsperado); 
 	}
 	
+	/**
+	 * Teste do método que fera um Document a partir de um File no caso de falha
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	@Test(expected = FileNotFoundException.class)
 	public void testGetDocumentFromFileFailure() throws ParserConfigurationException, SAXException, IOException
 	{
@@ -37,6 +48,12 @@ public class DomServiceTest {
 		Document output = domService.getDocumentFromFile(xmlFile);
 	}
 	
+	/**
+	 * Teste que faz a verificação da quantidade de nós de municípios retornados de um arquivo .kml
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	@Test
 	public void testGetNodeListFromFileSuccess() throws ParserConfigurationException, SAXException, IOException
 	{
@@ -57,7 +74,12 @@ public class DomServiceTest {
         Assert.assertEquals(resultadoLengthEsperado, outputlength);
 	}
 	
-	
+	/**
+	 * Teste na falha da verificação da quantidade de nós de municípios retornados de um arquivo .kml
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	@Test
 	public void testGetNodeListFromFileFailure() throws ParserConfigurationException, SAXException, IOException
 	{

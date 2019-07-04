@@ -1,5 +1,6 @@
 package pm.projetofinal.pm_project.Utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,14 +22,34 @@ public class Utils
 		return false;
 	}
 
+	public static <T> ArrayList<T> removeDuplicates( final ArrayList<T> list )
+	{
+
+		// Create a new ArrayList
+		final ArrayList<T> newList = new ArrayList<T>();
+
+		// Traverse through the first list
+		for ( final T element : list )
+		{
+
+			// If this element is not present in newList
+			// then add it
+			if ( !newList.contains( element ) )
+			{
+
+				newList.add( element );
+			}
+		}
+
+		// return the new list
+		return newList;
+	}
+
 	static
 	{
 		UF_MAP.put( new String( "12" ), "AC" );
 		UF_MAP.put( new String( "27" ), "AL" );
 		UF_MAP.put( new String( "13" ), "AM" );
-		UF_MAP.put( new String( "12" ), "AP" );
-		UF_MAP.put( new String( "12" ), "BA" );
-		UF_MAP.put( new String( "12" ), "CE" );
 		UF_MAP.put( new String( "16" ), "AP" );
 		UF_MAP.put( new String( "29" ), "BA" );
 		UF_MAP.put( new String( "23" ), "CE" );

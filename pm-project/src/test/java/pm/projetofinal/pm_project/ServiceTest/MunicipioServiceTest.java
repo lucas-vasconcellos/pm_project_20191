@@ -19,7 +19,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 
 
@@ -36,6 +35,12 @@ public class MunicipioServiceTest {
 	final String MUNICIPIO_KML_TAG = "Placemark";
 	final String filePath = String.format( "src\\kml\\RJ.kml");
 	final File xmlFile = new File(filePath);
+	
+	@Before
+	public void setUp()
+	{
+		this.municipioService1 = Mockito.spy(new MunicipioService());
+	}
 
 	@Test
 	public void testGetMunicipioFromNodeListExists() throws ParserConfigurationException, SAXException, IOException
@@ -48,34 +53,14 @@ public class MunicipioServiceTest {
         Assert.assertEquals(resultadoEsperado, isInstanceOfMunicipio); 
 	}
 	
-	//@PrepareForTest(System.class)
-	//@Test
-	//public void testGetMunicipioFromNodeListNotExists() throws ParserConfigurationException, SAXException, IOException
-	//{
-		//MunicipioService municipioService = new MunicipioService();
-		//DomService domService = new DomService();
-		
-		//final String MUNICIPIO_CODIGO = "3300605";
-		//final boolean isCode = true;
-		//final String MUNICIPIO_KML_TAG = "Placemark";
-		//final String filePath = String.format( "src\\kml\\ES.kml");
-		//final File xmlFile = new File(filePath);
-		
-		//NodeList nodeList = domService.getNodeListFromFile( xmlFile, MUNICIPIO_KML_TAG );
-		
-		//PowerMockito.mockStatic(System.class);
-		//String mockReturn = PowerMockito.when(System.out.println()).thenReturn("System.exit(0) was called!");
-		
-		//boolean resultadoEsperado = true;
-		//Assert.assertEquals(resultadoEsperado, municipioService.getMunicipioFromNodeList(nodeList, MUNICIPIO_CODIGO, isCode));;
-	//}
-	
 	@Test
-	public void testGetMunicipio() throws ParserConfigurationException, SAXException, IOException
+	public void testGetMunicipio() throws Exception
 	{
 		
-		municipioService1 = new MunicipioService();
+		PowerMockito.whenNew(MunicipioService.class).withNoArguments().thenReturn(this.municipioService1);
 		NodeList nodeList = domService.getNodeListFromFile( xmlFile, MUNICIPIO_KML_TAG );
-		Municipio output = municipioService.getMunicipioFromNodeList(nodeList, MUNICIPIO_CODIGO, isCode);
+		Municipio output = municipioService1.getMunicipioFromNodeList(nodeList, MUNICIPIO_CODIGO, isCode);
+		Node node = nodeList.item(10);
+		verify(this.municipioService1, times(1)).getMunicipio(node);
 	}
 }

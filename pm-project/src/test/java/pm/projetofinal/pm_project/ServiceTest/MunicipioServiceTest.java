@@ -3,6 +3,8 @@ package pm.projetofinal.pm_project.ServiceTest;
 import static org.mockito.Mockito.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.xml.parsers.ParserConfigurationException;
 import org.junit.Assert;
 import org.junit.Before;
@@ -86,7 +88,7 @@ public class MunicipioServiceTest {
 	}
 	
 	@Test
-	public void testPrintMunicipioData() throws ParserConfigurationException, SAXException, IOException
+	public void testGetMunicipioDataFromDocumentTrueData() throws ParserConfigurationException, SAXException, IOException
 	{
 		NodeList nodeList = domService.getNodeListFromFile( xmlFile, MUNICIPIO_KML_TAG );
 		Municipio municipio = municipioService.getMunicipioFromNodeList(nodeList, MUNICIPIO_CODIGO, isCode);
@@ -95,6 +97,25 @@ public class MunicipioServiceTest {
 		final Document overPassResponse = overpassService.getOverpassDocument( boundingBox );
 		final MunicipioData municipioData = municipioService.getMunicipioDataFromDocument( overPassResponse );
 		
-		municipioService.printMunicipioData(municipioData, municipio.getNome());
+		ArrayList<String> portos = municipioData.ports;
+		boolean containsPortoSantos = portos.contains("Porto de Santos");
+		boolean resultadoEsperado = true;
+		Assert.assertEquals(resultadoEsperado, containsPortoSantos);
+	}
+	
+	@Test
+	public void testGetMunicipioDataFromDocumentFalseData() throws ParserConfigurationException, SAXException, IOException
+	{
+		NodeList nodeList = domService.getNodeListFromFile( xmlFile, MUNICIPIO_KML_TAG );
+		Municipio municipio = municipioService.getMunicipioFromNodeList(nodeList, MUNICIPIO_CODIGO, isCode);
+		
+		final BoundingBox boundingBox = municipio.getBoundingBox();
+		final Document overPassResponse = overpassService.getOverpassDocument( boundingBox );
+		final MunicipioData municipioData = municipioService.getMunicipioDataFromDocument( overPassResponse );
+		
+		ArrayList<String> portos = municipioData.aeroways;
+		boolean containsPortoSantos = portos.contains("Aeroporto Internacional Tom Jobim");
+		boolean resultadoEsperado = false;
+		Assert.assertEquals(resultadoEsperado, containsPortoSantos);
 	}
 }

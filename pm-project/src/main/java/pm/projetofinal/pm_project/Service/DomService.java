@@ -21,6 +21,17 @@ import org.xml.sax.SAXException;
 public class DomService
 {
 
+	/**
+	 * <p>
+	 * Gera um Document a partir de um File
+	 * </p>
+	 *
+	 * @param file
+	 * @return
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	public Document getDocumentFromFile( final File file )
 		throws ParserConfigurationException,
 			SAXException,
@@ -36,6 +47,18 @@ public class DomService
 		return document;
 	}
 
+	/**
+	 * <p>
+	 * Gera uma NodeList baseada numa tag a partir de um File
+	 * </p>
+	 *
+	 * @param file
+	 * @param tag
+	 * @return
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	public NodeList getNodeListFromFile( final File file, final String tag )
 		throws ParserConfigurationException,
 			SAXException,

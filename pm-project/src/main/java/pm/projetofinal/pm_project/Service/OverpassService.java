@@ -20,6 +20,17 @@ import pm.projetofinal.pm_project.Model.BoundingBox;
 public class OverpassService
 {
 
+	/**
+	 * <p>
+	 * Faz a requisição para a Api do Overpass e recebe o .osmn
+	 * </p>
+	 * 
+	 * @param boundingBox
+	 * @return
+	 * @throws IOException
+	 * @throws SAXException
+	 * @throws ParserConfigurationException
+	 */
 	public Document getOverpassDocument( final BoundingBox boundingBox )
 		throws IOException,
 			SAXException,

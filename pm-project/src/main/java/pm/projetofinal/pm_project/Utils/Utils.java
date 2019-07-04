@@ -14,8 +14,21 @@ import java.util.Map;
 public class Utils
 {
 
+	/**
+	 * <p>
+	 * Map com os códigos como chave e UF como valor Field <code>UF_MAP</code>
+	 * </p>
+	 */
 	public static final Map<String, String> UF_MAP = new HashMap<String, String>();
 
+	/**
+	 * <p>
+	 * Faz uma tentativa de parsear uma string para inteiro.
+	 * </p>
+	 *
+	 * @param str
+	 * @return
+	 */
 	public static boolean isIntegerParseInt( final String str )
 	{
 		try
@@ -25,10 +38,18 @@ public class Utils
 		}
 		catch ( final NumberFormatException nfe )
 		{
+			return false;
 		}
-		return false;
 	}
 
+	/**
+	 * <p>
+	 * Remove elementos duplicados de um ArrayList
+	 * </p>
+	 *
+	 * @param list
+	 * @return
+	 */
 	public static <T> ArrayList<T> removeDuplicates( final ArrayList<T> list )
 	{
 

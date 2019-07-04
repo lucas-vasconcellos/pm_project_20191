@@ -18,10 +18,29 @@ import pm.projetofinal.pm_project.Model.BoundingBox;
 public class BoundingBoxService
 {
 
+	/**
+	 * <p>
+	 * Tag utilizada para buscar as coordenadas de um polígno num arquivo .kml Field
+	 * <code>COORDINATES_TAG</code>
+	 * </p>
+	 */
 	public static final String COORDINATES_TAG = "coordinates";
 
+	/**
+	 * <p>
+	 * Tag utilizada para buscar um polígno num arquivo .kml Field <code>POLYGON_TAG</code>
+	 * </p>
+	 */
 	public static final String POLYGON_TAG = "polygon";
 
+	/**
+	 * <p>
+	 * Gera a Bounding Box baseado num conjunto de corrdenadas obtidas de um arquivo .kml
+	 * </p>
+	 *
+	 * @param coordString
+	 * @return
+	 */
 	public BoundingBox generateBoundingBox( final String coordString )
 	{
 
@@ -61,6 +80,14 @@ public class BoundingBoxService
 		return boundingBox;
 	}
 
+	/**
+	 * <p>
+	 * Obtem uma string com as coordenadas de um polígono de um arquivo .kml
+	 * </p>
+	 * 
+	 * @param placemark
+	 * @return
+	 */
 	public String getCoordinatesString( final Element placemark )
 	{
 		final NodeList polygonList = placemark.getElementsByTagName( POLYGON_TAG );

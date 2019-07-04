@@ -21,8 +21,24 @@ import org.xml.sax.SAXException;
 public class OverpassApiController
 {
 
+	/**
+	 * <p>
+	 * URL de conexão com a API do Overpass Field <code>OVERPASS_API</code>
+	 * </p>
+	 */
 	private static final String OVERPASS_API = "http://overpass-api.de/api/map?bbox=";
 
+	/**
+	 * <p>
+	 * Faz a requisição GET para a API do Overpass
+	 * </p>
+	 * 
+	 * @param parameters
+	 * @return
+	 * @throws IOException
+	 * @throws SAXException
+	 * @throws ParserConfigurationException
+	 */
 	public static Document getOverpassApiXml( final String parameters )
 		throws IOException,
 			SAXException,

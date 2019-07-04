@@ -24,28 +24,81 @@ import pm.projetofinal.pm_project.Utils.XmlUtils;
 public class MunicipioService
 {
 
+	/**
+	 * <p>
+	 * Tags para verificação se uma way é um Aeroporto Field <code>AEROWAY_KEY</code>
+	 * </p>
+	 */
 	private static final String[] AEROWAY_KEY = {	"aeroway",
 													"aerodrome"};
 
+	/**
+	 * <p>
+	 * Field <code>boundingBoxGenerator</code>
+	 * </p>
+	 */
 	static BoundingBoxService boundingBoxGenerator = new BoundingBoxService();
 
+	/**
+	 * <p>
+	 * Tags para buscar as informações do municipio no .kml Field <code>DATA_TAG</code>
+	 * </p>
+	 */
 	private static final String DATA_TAG = "SimpleData";
 
+	/**
+	 * <p>
+	 * Tags para verificação se um way é uma Rodovia Field <code>HIGHWAY_KEY</code>
+	 * </p>
+	 */
 	private static final String[] HIGHWAY_KEY = {	"highway",
 													"primary"};
 
+	/**
+	 * <p>
+	 * Tags para buscar o nome de uma way Field <code>NAME_VALUE</code>
+	 * </p>
+	 */
 	private static final String NAME_VALUE = "name";
 
+	/**
+	 * <p>
+	 * Tags para verificação se uma tag da way é do tipo Tag Field <code>OSM_TAG</code>
+	 * </p>
+	 */
 	private static final String OSM_TAG = "tag";
 
+	/**
+	 * <p>
+	 * Tags para verificação se um way é um Porto Field <code>PORT_KEY</code>
+	 * </p>
+	 */
 	private static final String[] PORT_KEY = {	"industrial",
 												"port"};
 
+	/**
+	 * <p>
+	 * Tags para verificação se um way é uma Ferrovia Field <code>RAILWAY_KEY</code>
+	 * </p>
+	 */
 	private static final String[] RAILWAY_KEY = {	"railway",
 													"rail"};
 
+	/**
+	 * <p>
+	 * Tags para verificação se um node é uma way Field <code>WAY_TAG</code>
+	 * </p>
+	 */
 	private static final String WAY_TAG = "way";
 
+	/**
+	 * <p>
+	 * Gera um municipio a partir de um nó do .kml
+	 * </p>
+	 *
+	 * @param node
+	 * @return
+	 */
 	public Municipio getMunicipio( final Node node )
 	{
 
@@ -65,6 +118,15 @@ public class MunicipioService
 		return null;
 	}
 
+	/**
+	 * <p>
+	 * Método que obtém as informações sobre Rodovias, Ferrovias, Aeroportos e Portos de um
+	 * município dado um arquivo .osm obtido da api do Overpass
+	 * </p>
+	 *
+	 * @param document
+	 * @return
+	 */
 	public MunicipioData getMunicipioDataFromDocument( final Document document )
 	{
 		final ArrayList<String> highways = new ArrayList<String>();
@@ -145,6 +207,16 @@ public class MunicipioService
 
 	}
 
+	/**
+	 * <p>
+	 * Gera um município a partir de uma NodeList
+	 * </p>
+	 *
+	 * @param nodeList
+	 * @param municipio
+	 * @param isCode
+	 * @return
+	 */
 	public Municipio getMunicipioFromNodeList( final NodeList nodeList, final String municipio, final boolean isCode )
 	{
 
@@ -186,6 +258,14 @@ public class MunicipioService
 		return new Municipio();
 	}
 
+	/**
+	 * <p>
+	 * Exibe as informações obtidas no método getMunicipioDataFromDocument para o usuário.
+	 * </p>
+	 *
+	 * @param municipioData
+	 * @param nomeMunicipio
+	 */
 	public void printMunicipioData( final MunicipioData municipioData, final String nomeMunicipio )
 	{
 		final List<String> highways = municipioData.getHighways();

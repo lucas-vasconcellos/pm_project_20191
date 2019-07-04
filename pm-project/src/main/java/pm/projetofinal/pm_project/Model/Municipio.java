@@ -1,40 +1,119 @@
 package pm.projetofinal.pm_project.Model;
 
-public class Municipio {
-	String nome;
-	String codigo;
-	String uf;
-	BoundingBox boundingBox;
+/**
+ * <p>
+ * </p>
+ *
+ * @author joao.brouck
+ * @version 1.0 Created on Jul 3, 2019
+ */
+public class Municipio
+{
 
-	public String getNome() {
-		return nome;
+	/**
+	 * <p>
+	 * Construtor vazio
+	 * </p>
+	 */
+	public Municipio()
+	{
 	}
 
-	public void setNome(String nome) {
+	/**
+	 * <p>
+	 * Construtor
+	 * </p>
+	 *
+	 * @param boundingBox
+	 * @param codigo
+	 * @param nome
+	 */
+	public Municipio( final BoundingBox boundingBox, final String codigo, final String nome )
+	{
+		super();
+		this.boundingBox = boundingBox;
+		this.codigo = codigo;
 		this.nome = nome;
 	}
 
-	public String getCodigo() {
-		return codigo;
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @return Returns the boundingBox.
+	 * @see #boundingBox
+	 */
+	public BoundingBox getBoundingBox()
+	{
+		return this.boundingBox;
 	}
 
-	public void setCodigo(String codigo) {
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @return Returns the codigo.
+	 * @see #codigo
+	 */
+	public String getCodigo()
+	{
+		return this.codigo;
+	}
+
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @return Returns the nome.
+	 * @see #nome
+	 */
+	public String getNome()
+	{
+		return this.nome;
+	}
+
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param boundingBox
+	 *            The boundingBox to set.
+	 * @see #boundingBox
+	 */
+	public void setBoundingBox( final BoundingBox boundingBox )
+	{
+		this.boundingBox = boundingBox;
+	}
+
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param codigo
+	 *            The codigo to set.
+	 * @see #codigo
+	 */
+	public void setCodigo( final String codigo )
+	{
 		this.codigo = codigo;
 	}
 
-	public String getuf() {
-		return uf;
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param nome
+	 *            The nome to set.
+	 * @see #nome
+	 */
+	public void setNome( final String nome )
+	{
+		this.nome = nome;
 	}
 
-	public void setuf(String uf) {
-		this.uf = uf;
-	}
+	BoundingBox boundingBox;
 
-	public BoundingBox getBoundingBox() {
-		return boundingBox;
-	}
+	String codigo;
 
-	public void setBoundingBox(BoundingBox boundingBox) {
-		this.boundingBox = boundingBox;
-	}
+	String nome;
 }

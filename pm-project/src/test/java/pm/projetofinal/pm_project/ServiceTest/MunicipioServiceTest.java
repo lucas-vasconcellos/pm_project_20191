@@ -5,8 +5,11 @@ import java.io.File;
 import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import pm.projetofinal.pm_project.Model.Municipio;
@@ -19,21 +22,24 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 
-@RunWith(PowerMockRunner.class)
+
 public class MunicipioServiceTest {
 
+	
 	MunicipioService municipioService = new MunicipioService();
 	DomService domService = new DomService();
+	@Mock
+	MunicipioService municipioService1;
+	
+	final String MUNICIPIO_CODIGO = "3300605";
+	final boolean isCode = true;
+	final String MUNICIPIO_KML_TAG = "Placemark";
+	final String filePath = String.format( "src\\kml\\RJ.kml");
+	final File xmlFile = new File(filePath);
 
 	@Test
 	public void testGetMunicipioFromNodeListExists() throws ParserConfigurationException, SAXException, IOException
-	{
-		final String MUNICIPIO_CODIGO = "3300605";
-		final boolean isCode = true;
-		final String MUNICIPIO_KML_TAG = "Placemark";
-		final String filePath = String.format( "src\\kml\\RJ.kml");
-		final File xmlFile = new File(filePath);
-		
+	{		
 		NodeList nodeList = domService.getNodeListFromFile( xmlFile, MUNICIPIO_KML_TAG );
 		Municipio output = municipioService.getMunicipioFromNodeList(nodeList, MUNICIPIO_CODIGO, isCode);
 		
@@ -65,8 +71,11 @@ public class MunicipioServiceTest {
 	//}
 	
 	@Test
-	public void testGetMunicipio()
+	public void testGetMunicipio() throws ParserConfigurationException, SAXException, IOException
 	{
 		
+		municipioService1 = new MunicipioService();
+		NodeList nodeList = domService.getNodeListFromFile( xmlFile, MUNICIPIO_KML_TAG );
+		Municipio output = municipioService.getMunicipioFromNodeList(nodeList, MUNICIPIO_CODIGO, isCode);
 	}
 }

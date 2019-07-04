@@ -1,34 +1,13 @@
 package pm.projetofinal.pm_project.Utils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * <p>
- * </p>
- *
- * @author joao.brouck
- * @version 1.0 Created on Jul 3, 2019
- */
 public class Utils
 {
 
-	/**
-	 * <p>
-	 * Map com os códigos como chave e UF como valor Field <code>UF_MAP</code>
-	 * </p>
-	 */
 	public static final Map<String, String> UF_MAP = new HashMap<String, String>();
 
-	/**
-	 * <p>
-	 * Faz uma tentativa de parsear uma string para inteiro.
-	 * </p>
-	 *
-	 * @param str
-	 * @return
-	 */
 	public static boolean isIntegerParseInt( final String str )
 	{
 		try
@@ -38,39 +17,8 @@ public class Utils
 		}
 		catch ( final NumberFormatException nfe )
 		{
-			return false;
 		}
-	}
-
-	/**
-	 * <p>
-	 * Remove elementos duplicados de um ArrayList
-	 * </p>
-	 *
-	 * @param list
-	 * @return
-	 */
-	public static <T> ArrayList<T> removeDuplicates( final ArrayList<T> list )
-	{
-
-		// Create a new ArrayList
-		final ArrayList<T> newList = new ArrayList<T>();
-
-		// Traverse through the first list
-		for ( final T element : list )
-		{
-
-			// If this element is not present in newList
-			// then add it
-			if ( !newList.contains( element ) )
-			{
-
-				newList.add( element );
-			}
-		}
-
-		// return the new list
-		return newList;
+		return false;
 	}
 
 	static
@@ -78,6 +26,9 @@ public class Utils
 		UF_MAP.put( new String( "12" ), "AC" );
 		UF_MAP.put( new String( "27" ), "AL" );
 		UF_MAP.put( new String( "13" ), "AM" );
+		UF_MAP.put( new String( "12" ), "AP" );
+		UF_MAP.put( new String( "12" ), "BA" );
+		UF_MAP.put( new String( "12" ), "CE" );
 		UF_MAP.put( new String( "16" ), "AP" );
 		UF_MAP.put( new String( "29" ), "BA" );
 		UF_MAP.put( new String( "23" ), "CE" );

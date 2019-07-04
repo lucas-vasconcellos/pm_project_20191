@@ -11,62 +11,24 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-/**
- * <p>
- * </p>
- *
- * @author joao.brouck
- * @version 1.0 Created on Jul 3, 2019
- */
-public class DomService
-{
+public class DomService {
 
-	/**
-	 * <p>
-	 * Gera um Document a partir de um File
-	 * </p>
-	 *
-	 * @param file
-	 * @return
-	 * @throws ParserConfigurationException
-	 * @throws SAXException
-	 * @throws IOException
-	 */
-	public Document getDocumentFromFile( final File file )
-		throws ParserConfigurationException,
-			SAXException,
-			IOException
-	{
+	public Document getDocumentFromFile(File file) throws ParserConfigurationException, SAXException, IOException {
 
-		final DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
 		dBuilder = dbFactory.newDocumentBuilder();
-		final Document document = dBuilder.parse( file );
+		Document document = dBuilder.parse(file);
 		document.getDocumentElement().normalize();
 
 		return document;
 	}
 
-	/**
-	 * <p>
-	 * Gera uma NodeList baseada numa tag a partir de um File
-	 * </p>
-	 *
-	 * @param file
-	 * @param tag
-	 * @return
-	 * @throws ParserConfigurationException
-	 * @throws SAXException
-	 * @throws IOException
-	 */
-	public NodeList getNodeListFromFile( final File file, final String tag )
-		throws ParserConfigurationException,
-			SAXException,
-			IOException
-	{
+	public NodeList getNodeListFromFile(File file, String tag)
+			throws ParserConfigurationException, SAXException, IOException {
 
-		final Document document = getDocumentFromFile( file );
-		final NodeList nodeList = document.getElementsByTagName( tag );
+		Document document = this.getDocumentFromFile(file);
+		NodeList nodeList = document.getElementsByTagName(tag);
 
 		return nodeList;
 	}

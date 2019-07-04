@@ -2,28 +2,22 @@ package pm.projetofinal.pm_project;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStreamReader;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import pm.projetofinal.pm_project.Model.BoundingBox;
 import pm.projetofinal.pm_project.Model.Municipio;
-import pm.projetofinal.pm_project.Model.MunicipioData;
 import pm.projetofinal.pm_project.Service.BoundingBoxService;
 import pm.projetofinal.pm_project.Service.DomService;
 import pm.projetofinal.pm_project.Service.MunicipioService;
 import pm.projetofinal.pm_project.Service.OverpassService;
 import pm.projetofinal.pm_project.Utils.Utils;
 
-/**
- * <p>
- * </p>
- *
- * @author joao.brouck
- * @version 1.0 Created on Jul 3, 2019
- */
 public class App
 {
 
@@ -38,7 +32,8 @@ public class App
 	static OverpassService overpassService = new OverpassService();
 
 	public static void main( final String[] args )
-		throws Exception
+		throws ParserConfigurationException,
+			SAXException
 	{
 
 		String uf = "";
@@ -81,11 +76,15 @@ public class App
 			{
 				final BoundingBox boundingBox = municipio.getBoundingBox();
 				final Document overPassResponse = overpassService.getOverpassDocument( boundingBox );
-				final MunicipioData municipioData = municipioService.getMunicipioDataFromDocument( overPassResponse );
-				municipioService.printMunicipioData( municipioData, municipio.getNome() );
 			}
+
+			// TODO utilizar o document para buscar os dados e montar a exibição.
+			// https://wiki.openstreetmap.org/wiki/Map_Features#Highway
+			// NodeList nodeList2 = is.getElementsByTagName("way");
+			// System.out.println(nodeList2.getLength());
+
 		}
-		catch ( final IOException e )
+		catch ( final Exception e )
 		{
 			System.out.println( "Houve um problema com a requisição." );
 		}

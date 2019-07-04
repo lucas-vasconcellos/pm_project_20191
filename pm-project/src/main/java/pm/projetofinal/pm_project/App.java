@@ -24,8 +24,7 @@ import pm.projetofinal.pm_project.Utils.Utils;
  * @author joao.brouck
  * @version 1.0 Created on Jul 3, 2019
  */
-public class App
-{
+public class App {
 
 	static BoundingBoxService boundingBoxService = new BoundingBoxService();
 
@@ -37,57 +36,45 @@ public class App
 
 	static OverpassService overpassService = new OverpassService();
 
-	public static void main( final String[] args )
-		throws Exception
-	{
+	public static void main(final String[] args) throws Exception {
 
 		String uf = "";
 		boolean isCode = true;
 		String entryMunicipio = "";
-		final BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ) );
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-		try
-		{
+		try {
 
 			entryMunicipio = reader.readLine().toString().toUpperCase();
 
-			if ( Utils.isIntegerParseInt( entryMunicipio ) )
-			{
-				uf = entryMunicipio.substring( 0, 2 );
-				uf = Utils.UF_MAP.get( entryMunicipio.substring( 0, 2 ) );
-			}
-			else
-			{
-				uf = entryMunicipio.split( "-" )[1];
+			if (Utils.isIntegerParseInt(entryMunicipio)) {
+				uf = entryMunicipio.substring(0, 2);
+				uf = Utils.UF_MAP.get(entryMunicipio.substring(0, 2));
+			} else {
+				uf = entryMunicipio.split("-")[1];
 
 				isCode = false;
 			}
-		}
-		catch ( final Exception e )
-		{
-			System.out.println( "Informação inválida foi inserida. O formato correto é municipio-UF ou o código." );
-			System.exit( 0 );
+		} catch (final Exception e) {
+			System.out.println("Informação inválida foi inserida. O formato correto é municipio-UF ou o código.");
+			System.exit(0);
 		}
 
-		final String filePath = String.format( "src\\kml\\%s.kml", uf );
-		final File xmlFile = new File( filePath );
+		final String filePath = String.format("src\\kml\\%s.kml", uf);
+		final File xmlFile = new File(filePath);
 
-		try
-		{
+		try {
 
-			final NodeList nodeList = domService.getNodeListFromFile( xmlFile, MUNICIPIO_KML_TAG );
-			final Municipio municipio = municipioService.getMunicipioFromNodeList( nodeList, entryMunicipio, isCode );
-			if ( municipio != null )
-			{
+			final NodeList nodeList = domService.getNodeListFromFile(xmlFile, MUNICIPIO_KML_TAG);
+			final Municipio municipio = municipioService.getMunicipioFromNodeList(nodeList, entryMunicipio, isCode);
+			if (municipio != null) {
 				final BoundingBox boundingBox = municipio.getBoundingBox();
-				final Document overPassResponse = overpassService.getOverpassDocument( boundingBox );
-				final MunicipioData municipioData = municipioService.getMunicipioDataFromDocument( overPassResponse );
-				municipioService.printMunicipioData( municipioData, municipio.getNome() );
+				final Document overPassResponse = overpassService.getOverpassDocument(boundingBox);
+				final MunicipioData municipioData = municipioService.getMunicipioDataFromDocument(overPassResponse);
+				municipioService.printMunicipioData(municipioData, municipio.getNome());
 			}
-		}
-		catch ( final IOException e )
-		{
-			System.out.println( "Houve um problema com a requisição." );
+		} catch (final IOException e) {
+			System.out.println("Houve um problema com a requisição.");
 		}
 
 	}

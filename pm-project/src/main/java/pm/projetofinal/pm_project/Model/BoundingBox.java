@@ -7,8 +7,7 @@ package pm.projetofinal.pm_project.Model;
  * @author joao.brouck
  * @version 1.0 Created on Jul 3, 2019
  */
-public class BoundingBox
-{
+public class BoundingBox {
 
 	/**
 	 * <p>
@@ -20,8 +19,7 @@ public class BoundingBox
 	 * @param minLat
 	 * @param minLong
 	 */
-	public BoundingBox( final double maxLat, final double maxLong, final double minLat, final double minLong )
-	{
+	public BoundingBox(final double maxLat, final double maxLong, final double minLat, final double minLong) {
 		super();
 		this.maxLat = maxLat;
 		this.maxLong = maxLong;
@@ -36,8 +34,7 @@ public class BoundingBox
 	 * @return Returns the maxLat.
 	 * @see #maxLat
 	 */
-	public double getMaxLat()
-	{
+	public double getMaxLat() {
 		return this.maxLat;
 	}
 
@@ -48,8 +45,7 @@ public class BoundingBox
 	 * @return Returns the maxLong.
 	 * @see #maxLong
 	 */
-	public double getMaxLong()
-	{
+	public double getMaxLong() {
 		return this.maxLong;
 	}
 
@@ -60,8 +56,7 @@ public class BoundingBox
 	 * @return Returns the minLat.
 	 * @see #minLat
 	 */
-	public double getMinLat()
-	{
+	public double getMinLat() {
 		return this.minLat;
 	}
 
@@ -72,8 +67,7 @@ public class BoundingBox
 	 * @return Returns the minLong.
 	 * @see #minLong
 	 */
-	public double getMinLong()
-	{
+	public double getMinLong() {
 		return this.minLong;
 	}
 
@@ -84,14 +78,9 @@ public class BoundingBox
 	 *
 	 * @return String formatada
 	 */
-	public String getStringForOverpass()
-	{
-		final String response = String.format(
-			"%.14f,%.14f,%.14f,%.14f",
-			getMinLat(),
-			getMinLong(),
-			getMaxLat(),
-			getMaxLong() );
+	public String getStringForOverpass() {
+		final String response = String.format("%.14f,%.14f,%.14f,%.14f", getMinLat(), getMinLong(), getMaxLat(),
+				getMaxLong());
 		return response;
 	}
 
@@ -103,8 +92,7 @@ public class BoundingBox
 	 *            The maxLat to set.
 	 * @see #maxLat
 	 */
-	public void setMaxLat( final double maxLat )
-	{
+	public void setMaxLat(final double maxLat) {
 		this.maxLat = maxLat;
 	}
 
@@ -116,8 +104,7 @@ public class BoundingBox
 	 *            The maxLong to set.
 	 * @see #maxLong
 	 */
-	public void setMaxLong( final double maxLong )
-	{
+	public void setMaxLong(final double maxLong) {
 		this.maxLong = maxLong;
 	}
 
@@ -129,8 +116,7 @@ public class BoundingBox
 	 *            The minLat to set.
 	 * @see #minLat
 	 */
-	public void setMinLat( final double minLat )
-	{
+	public void setMinLat(final double minLat) {
 		this.minLat = minLat;
 	}
 
@@ -142,8 +128,7 @@ public class BoundingBox
 	 *            The minLong to set.
 	 * @see #minLong
 	 */
-	public void setMinLong( final double minLong )
-	{
+	public void setMinLong(final double minLong) {
 		this.minLong = minLong;
 	}
 

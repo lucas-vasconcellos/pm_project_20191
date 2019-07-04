@@ -27,173 +27,152 @@ import pm.projetofinal.pm_project.Service.DomService;
 import pm.projetofinal.pm_project.Service.MunicipioService;
 import pm.projetofinal.pm_project.Service.OverpassService;
 
-public class MunicipioServiceTest
-{
+public class MunicipioServiceTest {
 	/**
 	 * Método que verifica se a string existe em um ArrayList<String>
+	 * 
 	 * @param element
 	 * @param list
 	 * @return
 	 */
-	public boolean elementExistsOnList( final String element, final ArrayList<String> list )
-	{
+	public boolean elementExistsOnList(final String element, final ArrayList<String> list) {
 		boolean exists = false;
-		for ( final String elementOfList : list )
-		{
-			if ( elementOfList.equals( element ) )
-			{
+		for (final String elementOfList : list) {
+			if (elementOfList.equals(element)) {
 				exists = true;
 				return exists;
 			}
 		}
 		return exists;
 	}
-	
+
 	/**
 	 * Método executado para instanciar um spy
 	 */
 	@Before
-	public void setUp()
-	{
-		this.municipioService = Mockito.spy( new MunicipioService() );
+	public void setUp() {
+		this.municipioService = Mockito.spy(new MunicipioService());
 	}
-	
+
 	/**
 	 * Teste que verifica se o método GetMunicipio é chamado somente uma vez.
+	 * 
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetMunicipio()
-		throws Exception
-	{
+	public void testGetMunicipio() throws Exception {
 
-		PowerMockito.whenNew( MunicipioService.class ).withNoArguments().thenReturn( this.municipioService );
-		final NodeList nodeList = this.domService.getNodeListFromFile( this.xmlFile, this.MUNICIPIO_KML_TAG );
-		final Municipio output = this.municipioService.getMunicipioFromNodeList(
-			nodeList,
-			this.MUNICIPIO_CODIGO,
-			this.isCode );
-		final Node node = nodeList.item( 10 );
-		verify( this.municipioService, times( 1 ) ).getMunicipio( node );
+		PowerMockito.whenNew(MunicipioService.class).withNoArguments().thenReturn(this.municipioService);
+		final NodeList nodeList = this.domService.getNodeListFromFile(this.xmlFile, this.MUNICIPIO_KML_TAG);
+		final Municipio output = this.municipioService.getMunicipioFromNodeList(nodeList, this.MUNICIPIO_CODIGO,
+				this.isCode);
+		final Node node = nodeList.item(10);
+		verify(this.municipioService, times(1)).getMunicipio(node);
 	}
 
 	/**
-	 * Teste que verifica se o método GetMunicipioDataFromDocument gera um município.
+	 * Teste que verifica se o método GetMunicipioDataFromDocument gera um
+	 * município.
+	 * 
 	 * @throws ParserConfigurationException
 	 * @throws SAXException
 	 * @throws IOException
 	 */
 	@Test
-	public void testGetMunicipioDataFromDocument()
-		throws ParserConfigurationException,
-			SAXException,
-			IOException
-	{
-		final NodeList nodeList = this.domService.getNodeListFromFile( this.xmlFile, this.MUNICIPIO_KML_TAG );
-		final Municipio municipio = this.municipioService.getMunicipioFromNodeList(
-			nodeList,
-			this.MUNICIPIO_CODIGO,
-			this.isCode );
+	public void testGetMunicipioDataFromDocument() throws ParserConfigurationException, SAXException, IOException {
+		final NodeList nodeList = this.domService.getNodeListFromFile(this.xmlFile, this.MUNICIPIO_KML_TAG);
+		final Municipio municipio = this.municipioService.getMunicipioFromNodeList(nodeList, this.MUNICIPIO_CODIGO,
+				this.isCode);
 
 		final BoundingBox boundingBox = municipio.getBoundingBox();
-		final Document overPassResponse = this.overpassService.getOverpassDocument( boundingBox );
-		final MunicipioData municipioData = this.municipioService.getMunicipioDataFromDocument( overPassResponse );
+		final Document overPassResponse = this.overpassService.getOverpassDocument(boundingBox);
+		final MunicipioData municipioData = this.municipioService.getMunicipioDataFromDocument(overPassResponse);
 
 		final boolean isInstanceOfMunicipioData = municipioData instanceof MunicipioData;
 		final boolean resultadoEsperado = true;
-		Assert.assertEquals( resultadoEsperado, isInstanceOfMunicipioData );
+		Assert.assertEquals(resultadoEsperado, isInstanceOfMunicipioData);
 	}
-	
+
 	/**
-	 * Teste que verifica se um MunicipioData não possui possui informações sobre outro município.
+	 * Teste que verifica se um MunicipioData não possui possui informações
+	 * sobre outro município.
+	 * 
 	 * @throws ParserConfigurationException
 	 * @throws SAXException
 	 * @throws IOException
 	 */
 	@Test
 	public void testGetMunicipioDataFromDocumentFalseData()
-		throws ParserConfigurationException,
-			SAXException,
-			IOException
-	{
-		final NodeList nodeList = this.domService.getNodeListFromFile( this.xmlFile, this.MUNICIPIO_KML_TAG );
-		final Municipio municipio = this.municipioService.getMunicipioFromNodeList(
-			nodeList,
-			this.MUNICIPIO_CODIGO,
-			this.isCode );
+			throws ParserConfigurationException, SAXException, IOException {
+		final NodeList nodeList = this.domService.getNodeListFromFile(this.xmlFile, this.MUNICIPIO_KML_TAG);
+		final Municipio municipio = this.municipioService.getMunicipioFromNodeList(nodeList, this.MUNICIPIO_CODIGO,
+				this.isCode);
 
 		final BoundingBox boundingBox = municipio.getBoundingBox();
-		final Document overPassResponse = this.overpassService.getOverpassDocument( boundingBox );
-		final MunicipioData municipioData = this.municipioService.getMunicipioDataFromDocument( overPassResponse );
+		final Document overPassResponse = this.overpassService.getOverpassDocument(boundingBox);
+		final MunicipioData municipioData = this.municipioService.getMunicipioDataFromDocument(overPassResponse);
 
 		final ArrayList<String> portos = municipioData.aeroways;
-		final boolean containsPortoSantos = portos.contains( "Aeroporto Internacional Tom Jobim" );
+		final boolean containsPortoSantos = portos.contains("Aeroporto Internacional Tom Jobim");
 		final boolean resultadoEsperado = false;
-		Assert.assertEquals( resultadoEsperado, containsPortoSantos );
+		Assert.assertEquals(resultadoEsperado, containsPortoSantos);
 	}
 
 	/**
-	 * Teste que verifica se um MunicipioData contém informações corretas sobre um município.
+	 * Teste que verifica se um MunicipioData contém informações corretas sobre
+	 * um município.
+	 * 
 	 * @throws ParserConfigurationException
 	 * @throws SAXException
 	 * @throws IOException
 	 */
 	@Test
 	public void testGetMunicipioDataFromDocumentTrueData()
-		throws ParserConfigurationException,
-			SAXException,
-			IOException
-	{
-		final NodeList nodeList = this.domService.getNodeListFromFile( this.xmlFile, this.MUNICIPIO_KML_TAG );
-		final Municipio municipio = this.municipioService.getMunicipioFromNodeList(
-			nodeList,
-			this.MUNICIPIO_CODIGO,
-			this.isCode );
+			throws ParserConfigurationException, SAXException, IOException {
+		final NodeList nodeList = this.domService.getNodeListFromFile(this.xmlFile, this.MUNICIPIO_KML_TAG);
+		final Municipio municipio = this.municipioService.getMunicipioFromNodeList(nodeList, this.MUNICIPIO_CODIGO,
+				this.isCode);
 
 		final BoundingBox boundingBox = municipio.getBoundingBox();
-		final Document overPassResponse = this.overpassService.getOverpassDocument( boundingBox );
-		final MunicipioData municipioData = this.municipioService.getMunicipioDataFromDocument( overPassResponse );
+		final Document overPassResponse = this.overpassService.getOverpassDocument(boundingBox);
+		final MunicipioData municipioData = this.municipioService.getMunicipioDataFromDocument(overPassResponse);
 
 		final ArrayList<String> portos = municipioData.ports;
 		final ArrayList<String> aeroportos = municipioData.aeroways;
 		final ArrayList<String> rodovias = municipioData.highways;
 
-		final boolean containsPorto = elementExistsOnList( "Terminal Integrador Portuário Luiz Antonio Mesquita", portos );
-		final boolean containsAeroporto = elementExistsOnList( null , aeroportos );
-		final boolean containsRodovia = elementExistsOnList( "Praça Francisco Martins dos Santos", rodovias );
+		final boolean containsPorto = elementExistsOnList("Terminal Integrador Portuário Luiz Antonio Mesquita",
+				portos);
+		final boolean containsAeroporto = elementExistsOnList(null, aeroportos);
+		final boolean containsRodovia = elementExistsOnList("Praça Francisco Martins dos Santos", rodovias);
 
 		final boolean resultadoEsperado = true;
-		Assert.assertEquals( resultadoEsperado, containsPorto );
-		Assert.assertEquals( resultadoEsperado, containsAeroporto );
-		Assert.assertEquals( resultadoEsperado, containsRodovia );
+		Assert.assertEquals(resultadoEsperado, containsPorto);
+		Assert.assertEquals(resultadoEsperado, containsAeroporto);
+		Assert.assertEquals(resultadoEsperado, containsRodovia);
 	}
 
 	/**
 	 * Verifica se o municipio retornado era o esperado.
+	 * 
 	 * @throws ParserConfigurationException
 	 * @throws SAXException
 	 * @throws IOException
 	 */
 	@Test
-	public void testGetMunicipioFromNodeListExists()
-		throws ParserConfigurationException,
-			SAXException,
-			IOException
-	{
-		final NodeList nodeList = this.domService.getNodeListFromFile( this.xmlFile, this.MUNICIPIO_KML_TAG );
-		final Municipio output = this.municipioService.getMunicipioFromNodeList(
-			nodeList,
-			this.MUNICIPIO_CODIGO,
-			this.isCode );
+	public void testGetMunicipioFromNodeListExists() throws ParserConfigurationException, SAXException, IOException {
+		final NodeList nodeList = this.domService.getNodeListFromFile(this.xmlFile, this.MUNICIPIO_KML_TAG);
+		final Municipio output = this.municipioService.getMunicipioFromNodeList(nodeList, this.MUNICIPIO_CODIGO,
+				this.isCode);
 
 		final boolean isInstanceOfMunicipio = output instanceof Municipio;
 		final boolean resultadoEsperado = true;
-		Assert.assertEquals( resultadoEsperado, isInstanceOfMunicipio );
+		Assert.assertEquals(resultadoEsperado, isInstanceOfMunicipio);
 	}
 
 	DomService domService = new DomService();
 
-	final String filePath = String.format( "src\\kml\\SP.kml" );
+	final String filePath = String.format("src\\kml\\SP.kml");
 
 	final boolean isCode = true;
 
@@ -206,5 +185,5 @@ public class MunicipioServiceTest
 
 	OverpassService overpassService = new OverpassService();
 
-	final File xmlFile = new File( this.filePath );
+	final File xmlFile = new File(this.filePath);
 }

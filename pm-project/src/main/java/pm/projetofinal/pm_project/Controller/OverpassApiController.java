@@ -18,8 +18,7 @@ import org.xml.sax.SAXException;
  * @author joao.brouck
  * @version 1.0 Created on Jul 3, 2019
  */
-public class OverpassApiController
-{
+public class OverpassApiController {
 
 	/**
 	 * <p>
@@ -39,20 +38,17 @@ public class OverpassApiController
 	 * @throws SAXException
 	 * @throws ParserConfigurationException
 	 */
-	public static Document getOverpassApiXml( final String parameters )
-		throws IOException,
-			SAXException,
-			ParserConfigurationException
-	{
+	public static Document getOverpassApiXml(final String parameters)
+			throws IOException, SAXException, ParserConfigurationException {
 
 		final String finalUrlString = OVERPASS_API + parameters;
-		final URL apiUrl = new URL( finalUrlString );
+		final URL apiUrl = new URL(finalUrlString);
 
-		final HttpURLConnection apiConn = ( HttpURLConnection ) apiUrl.openConnection();
+		final HttpURLConnection apiConn = (HttpURLConnection) apiUrl.openConnection();
 
 		final DocumentBuilderFactory dbfac = DocumentBuilderFactory.newInstance();
 		final DocumentBuilder docBuilder = dbfac.newDocumentBuilder();
-		final Document response = docBuilder.parse( apiConn.getInputStream() );
+		final Document response = docBuilder.parse(apiConn.getInputStream());
 
 		return response;
 	}

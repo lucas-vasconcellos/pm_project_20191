@@ -18,8 +18,7 @@ import org.xml.sax.SAXException;
  * @author joao.brouck
  * @version 1.0 Created on Jul 3, 2019
  */
-public class DomService
-{
+public class DomService {
 
 	/**
 	 * <p>
@@ -32,16 +31,13 @@ public class DomService
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	public Document getDocumentFromFile( final File file )
-		throws ParserConfigurationException,
-			SAXException,
-			IOException
-	{
+	public Document getDocumentFromFile(final File file)
+			throws ParserConfigurationException, SAXException, IOException {
 
 		final DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
 		dBuilder = dbFactory.newDocumentBuilder();
-		final Document document = dBuilder.parse( file );
+		final Document document = dBuilder.parse(file);
 		document.getDocumentElement().normalize();
 
 		return document;
@@ -59,14 +55,11 @@ public class DomService
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	public NodeList getNodeListFromFile( final File file, final String tag )
-		throws ParserConfigurationException,
-			SAXException,
-			IOException
-	{
+	public NodeList getNodeListFromFile(final File file, final String tag)
+			throws ParserConfigurationException, SAXException, IOException {
 
-		final Document document = getDocumentFromFile( file );
-		final NodeList nodeList = document.getElementsByTagName( tag );
+		final Document document = getDocumentFromFile(file);
+		final NodeList nodeList = document.getElementsByTagName(tag);
 
 		return nodeList;
 	}

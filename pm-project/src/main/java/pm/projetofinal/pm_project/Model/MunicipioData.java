@@ -9,8 +9,7 @@ import java.util.ArrayList;
  * @author joao.brouck
  * @version 1.0 Created on Jul 3, 2019
  */
-public class MunicipioData
-{
+public class MunicipioData {
 
 	/**
 	 * <p>
@@ -22,12 +21,8 @@ public class MunicipioData
 	 * @param ports
 	 * @param railways
 	 */
-	public MunicipioData(
-		final ArrayList<String> aeroways,
-		final ArrayList<String> highways,
-		final ArrayList<String> ports,
-		final ArrayList<String> railways )
-	{
+	public MunicipioData(final ArrayList<String> aeroways, final ArrayList<String> highways,
+			final ArrayList<String> ports, final ArrayList<String> railways) {
 		super();
 		this.aeroways = aeroways;
 		this.highways = highways;
@@ -42,8 +37,7 @@ public class MunicipioData
 	 * @return Returns the aeroways.
 	 * @see #aeroways
 	 */
-	public ArrayList<String> getAeroways()
-	{
+	public ArrayList<String> getAeroways() {
 		return this.aeroways;
 	}
 
@@ -54,8 +48,7 @@ public class MunicipioData
 	 * @return Returns the highways.
 	 * @see #highways
 	 */
-	public ArrayList<String> getHighways()
-	{
+	public ArrayList<String> getHighways() {
 		return this.highways;
 	}
 
@@ -66,8 +59,7 @@ public class MunicipioData
 	 * @return Returns the ports.
 	 * @see #ports
 	 */
-	public ArrayList<String> getPorts()
-	{
+	public ArrayList<String> getPorts() {
 		return this.ports;
 	}
 
@@ -78,8 +70,7 @@ public class MunicipioData
 	 * @return Returns the railways.
 	 * @see #railways
 	 */
-	public ArrayList<String> getRailways()
-	{
+	public ArrayList<String> getRailways() {
 		return this.railways;
 	}
 
@@ -91,8 +82,7 @@ public class MunicipioData
 	 *            The aeroways to set.
 	 * @see #aeroways
 	 */
-	public void setAeroways( final ArrayList<String> aeroways )
-	{
+	public void setAeroways(final ArrayList<String> aeroways) {
 		this.aeroways = aeroways;
 	}
 
@@ -104,8 +94,7 @@ public class MunicipioData
 	 *            The highways to set.
 	 * @see #highways
 	 */
-	public void setHighways( final ArrayList<String> highways )
-	{
+	public void setHighways(final ArrayList<String> highways) {
 		this.highways = highways;
 	}
 
@@ -117,8 +106,7 @@ public class MunicipioData
 	 *            The ports to set.
 	 * @see #ports
 	 */
-	public void setPorts( final ArrayList<String> ports )
-	{
+	public void setPorts(final ArrayList<String> ports) {
 		this.ports = ports;
 	}
 
@@ -130,8 +118,7 @@ public class MunicipioData
 	 *            The railways to set.
 	 * @see #railways
 	 */
-	public void setRailways( final ArrayList<String> railways )
-	{
+	public void setRailways(final ArrayList<String> railways) {
 		this.railways = railways;
 	}
 

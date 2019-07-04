@@ -7,16 +7,14 @@ package pm.projetofinal.pm_project.Model;
  * @author joao.brouck
  * @version 1.0 Created on Jul 3, 2019
  */
-public class Municipio
-{
+public class Municipio {
 
 	/**
 	 * <p>
 	 * Construtor vazio
 	 * </p>
 	 */
-	public Municipio()
-	{
+	public Municipio() {
 	}
 
 	/**
@@ -28,8 +26,7 @@ public class Municipio
 	 * @param codigo
 	 * @param nome
 	 */
-	public Municipio( final BoundingBox boundingBox, final String codigo, final String nome )
-	{
+	public Municipio(final BoundingBox boundingBox, final String codigo, final String nome) {
 		super();
 		this.boundingBox = boundingBox;
 		this.codigo = codigo;
@@ -43,8 +40,7 @@ public class Municipio
 	 * @return Returns the boundingBox.
 	 * @see #boundingBox
 	 */
-	public BoundingBox getBoundingBox()
-	{
+	public BoundingBox getBoundingBox() {
 		return this.boundingBox;
 	}
 
@@ -55,8 +51,7 @@ public class Municipio
 	 * @return Returns the codigo.
 	 * @see #codigo
 	 */
-	public String getCodigo()
-	{
+	public String getCodigo() {
 		return this.codigo;
 	}
 
@@ -67,8 +62,7 @@ public class Municipio
 	 * @return Returns the nome.
 	 * @see #nome
 	 */
-	public String getNome()
-	{
+	public String getNome() {
 		return this.nome;
 	}
 
@@ -80,8 +74,7 @@ public class Municipio
 	 *            The boundingBox to set.
 	 * @see #boundingBox
 	 */
-	public void setBoundingBox( final BoundingBox boundingBox )
-	{
+	public void setBoundingBox(final BoundingBox boundingBox) {
 		this.boundingBox = boundingBox;
 	}
 
@@ -93,8 +86,7 @@ public class Municipio
 	 *            The codigo to set.
 	 * @see #codigo
 	 */
-	public void setCodigo( final String codigo )
-	{
+	public void setCodigo(final String codigo) {
 		this.codigo = codigo;
 	}
 
@@ -106,8 +98,7 @@ public class Municipio
 	 *            The nome to set.
 	 * @see #nome
 	 */
-	public void setNome( final String nome )
-	{
+	public void setNome(final String nome) {
 		this.nome = nome;
 	}
 

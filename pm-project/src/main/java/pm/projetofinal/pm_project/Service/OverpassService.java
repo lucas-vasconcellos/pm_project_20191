@@ -17,8 +17,7 @@ import pm.projetofinal.pm_project.Model.BoundingBox;
  * @author joao.brouck
  * @version 1.0 Created on Jul 3, 2019
  */
-public class OverpassService
-{
+public class OverpassService {
 
 	/**
 	 * <p>
@@ -31,13 +30,10 @@ public class OverpassService
 	 * @throws SAXException
 	 * @throws ParserConfigurationException
 	 */
-	public Document getOverpassDocument( final BoundingBox boundingBox )
-		throws IOException,
-			SAXException,
-			ParserConfigurationException
-	{
+	public Document getOverpassDocument(final BoundingBox boundingBox)
+			throws IOException, SAXException, ParserConfigurationException {
 
-		final Document document = OverpassApiController.getOverpassApiXml( boundingBox.getStringForOverpass() );
+		final Document document = OverpassApiController.getOverpassApiXml(boundingBox.getStringForOverpass());
 		document.getDocumentElement().normalize();
 
 		return document;

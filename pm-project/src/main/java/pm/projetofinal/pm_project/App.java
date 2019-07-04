@@ -17,6 +17,13 @@ import pm.projetofinal.pm_project.Service.MunicipioService;
 import pm.projetofinal.pm_project.Service.OverpassService;
 import pm.projetofinal.pm_project.Utils.Utils;
 
+/**
+ * <p>
+ * </p>
+ *
+ * @author joao.brouck
+ * @version 1.0 Created on Jul 3, 2019
+ */
 public class App
 {
 
@@ -81,7 +88,6 @@ public class App
 		catch ( final IOException e )
 		{
 			System.out.println( "Houve um problema com a requisição." );
-			throw e;
 		}
 
 	}

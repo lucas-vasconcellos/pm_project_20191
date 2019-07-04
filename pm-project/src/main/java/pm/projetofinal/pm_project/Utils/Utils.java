@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <p>
+ * </p>
+ *
+ * @author joao.brouck
+ * @version 1.0 Created on Jul 3, 2019
+ */
 public class Utils
 {
 

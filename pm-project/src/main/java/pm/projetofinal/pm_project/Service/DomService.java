@@ -11,24 +11,39 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class DomService {
+/**
+ * <p>
+ * </p>
+ *
+ * @author joao.brouck
+ * @version 1.0 Created on Jul 3, 2019
+ */
+public class DomService
+{
 
-	public Document getDocumentFromFile(File file) throws ParserConfigurationException, SAXException, IOException {
+	public Document getDocumentFromFile( final File file )
+		throws ParserConfigurationException,
+			SAXException,
+			IOException
+	{
 
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		final DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
 		dBuilder = dbFactory.newDocumentBuilder();
-		Document document = dBuilder.parse(file);
+		final Document document = dBuilder.parse( file );
 		document.getDocumentElement().normalize();
 
 		return document;
 	}
 
-	public NodeList getNodeListFromFile(File file, String tag)
-			throws ParserConfigurationException, SAXException, IOException {
+	public NodeList getNodeListFromFile( final File file, final String tag )
+		throws ParserConfigurationException,
+			SAXException,
+			IOException
+	{
 
-		Document document = this.getDocumentFromFile(file);
-		NodeList nodeList = document.getElementsByTagName(tag);
+		final Document document = getDocumentFromFile( file );
+		final NodeList nodeList = document.getElementsByTagName( tag );
 
 		return nodeList;
 	}

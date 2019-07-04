@@ -8,6 +8,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import pm.projetofinal.pm_project.Model.BoundingBox;
 import pm.projetofinal.pm_project.Model.Municipio;
 import pm.projetofinal.pm_project.Model.MunicipioData;
 import pm.projetofinal.pm_project.Utils.Utils;
@@ -16,26 +17,45 @@ import pm.projetofinal.pm_project.Utils.XmlUtils;
 public class MunicipioService
 {
 
+	private static final String[] AEROWAY_KEY = {	"aeroway",
+													"aerodrome"};
+
 	static BoundingBoxService boundingBoxGenerator = new BoundingBoxService();
 
 	private static final String DATA_TAG = "SimpleData";
+
+	private static final String[] HIGHWAY_KEY = {	"highway",
+													"primary"};
+
+	private static final String NAME_VALUE = "name";
+
+	private static final String OSM_TAG = "tag";
+
+	private static final String[] PORT_KEY = {	"industrial",
+												"port"};
+
+	private static final String[] RAILWAY_KEY = {	"railway",
+													"rail"};
 
 	private static final String WAY_TAG = "way";
 
 	public Municipio getMunicipio( final Node node )
 	{
-		final Municipio municipio = new Municipio();
+
 		if ( node.getNodeType() == Node.ELEMENT_NODE )
 		{
 			final Element element = ( Element ) node;
 			final String coordinates = boundingBoxGenerator.getCoordinatesString( element );
+			final String name = element.getElementsByTagName( DATA_TAG ).item( 0 ).getTextContent();
+			final String code = element.getElementsByTagName( DATA_TAG ).item( 0 ).getTextContent();
+			final BoundingBox BoundingBox = boundingBoxGenerator.generateBoundingBox( coordinates );
 
-			municipio.setNome( element.getElementsByTagName( DATA_TAG ).item( 0 ).getTextContent() );
-			municipio.setCodigo( element.getElementsByTagName( DATA_TAG ).item( 1 ).getTextContent() );
-			municipio.setBoundingBox( boundingBoxGenerator.generateBoundingBox( coordinates ) );
+			final Municipio municipio = new Municipio( BoundingBox, code, name );
+
+			return municipio;
 		}
 
-		return municipio;
+		return null;
 	}
 
 	public MunicipioData getMunicipioDataFromDocument( final Document document )
@@ -45,15 +65,13 @@ public class MunicipioService
 		final ArrayList<String> railways = new ArrayList<String>();
 		final ArrayList<String> aeroways = new ArrayList<String>();
 
-		final MunicipioData municipioData = new MunicipioData();
-
 		final NodeList waysNodeList = document.getElementsByTagName( WAY_TAG );
 
 		for ( int i = 0; i < waysNodeList.getLength(); i++ )
 		{
 			final Node node = waysNodeList.item( i );
 			final Element element = ( Element ) node;
-			final List<Element> elements = XmlUtils.getElements( element, "tag" );
+			final List<Element> elements = XmlUtils.getElements( element, OSM_TAG );
 			boolean isPrimaryHighway = false;
 			boolean isPort = false;
 			boolean isRailway = false;
@@ -67,55 +85,55 @@ public class MunicipioService
 				key = XmlUtils.getStringAttribute( e, "k" );
 				value = XmlUtils.getStringAttribute( e, "v" );
 				// Verificando Estradas principais
-				if ( key.equals( "highway" ) && value.equals( "primary" ) )
+				if ( key.equals( HIGHWAY_KEY[0] ) && value.equals( HIGHWAY_KEY[1] ) )
 				{
 					isPrimaryHighway = true;
 				}
-				if ( isPrimaryHighway && key.equals( "name" ) )
+				if ( isPrimaryHighway && key.equals( NAME_VALUE ) )
 				{
 					highways.add( value );
 					break;
 				}
 
 				// Verificando portos
-				if ( key.equals( "industrial" ) && value.equals( "port" ) )
+				if ( key.equals( PORT_KEY[0] ) && value.equals( PORT_KEY[1] ) )
 				{
 					isPort = true;
 				}
-				if ( isPort && key.equals( "name" ) )
+				if ( isPort && key.equals( NAME_VALUE ) )
 				{
 					ports.add( value );
 					break;
 				}
 
 				// Verificando aeroportos
-				if ( key.equals( "aeroway" ) && value.equals( "aerodrome" ) )
+				if ( key.equals( AEROWAY_KEY[0] ) && value.equals( AEROWAY_KEY[1] ) )
 				{
 					isAeroway = true;
 				}
-				if ( isAeroway && key.equals( "name" ) )
+				if ( isAeroway && key.equals( NAME_VALUE ) )
 				{
 					aeroways.add( value );
 					break;
 				}
 
 				// Verificando ferrovia
-				if ( key.equals( "railway" ) && value.equals( "rail" ) )
+				if ( key.equals( RAILWAY_KEY[0] ) && value.equals( RAILWAY_KEY[1] ) )
 				{
 					isRailway = true;
 				}
-				if ( isRailway && key.equals( "name" ) )
+				if ( isRailway && key.equals( NAME_VALUE ) )
 				{
 					railways.add( value );
 					break;
 				}
 			}
 		}
-		municipioData.setHighways( Utils.removeDuplicates( highways ) );
-		municipioData.setAeroways( aeroways );
-		municipioData.setPorts( ports );
-		municipioData.setRailways( railways );
-
+		final MunicipioData municipioData = new MunicipioData(
+			aeroways,
+			Utils.removeDuplicates( highways ),
+			ports,
+			railways );
 		return municipioData;
 
 	}
@@ -159,5 +177,34 @@ public class MunicipioService
 		System.out.println( "Município não encontrado" );
 		System.exit( 0 );
 		return new Municipio();
+	}
+
+	public void printMunicipioData( final MunicipioData municipioData, final String nomeMunicipio )
+	{
+		final List<String> highways = municipioData.getHighways();
+		final List<String> railways = municipioData.getRailways();
+		final List<String> aeroways = municipioData.getAeroways();
+		final List<String> ports = municipioData.getPorts();
+
+		System.out.println( nomeMunicipio.toUpperCase() + "\nRodovias: \n" );
+		for ( final String highway : highways )
+		{
+			System.out.println( highway );
+		}
+		System.out.println( "\nFerrovias: \n" );
+		for ( final String railway : railways )
+		{
+			System.out.println( railway );
+		}
+		System.out.println( "\nAeroportos: \n" );
+		for ( final String aeroway : aeroways )
+		{
+			System.out.println( aeroway );
+		}
+		System.out.println( "\nPortos: \n" );
+		for ( final String port : ports )
+		{
+			System.out.println( port );
+		}
 	}
 }

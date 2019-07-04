@@ -75,6 +75,7 @@ public class App
 				final BoundingBox boundingBox = municipio.getBoundingBox();
 				final Document overPassResponse = overpassService.getOverpassDocument( boundingBox );
 				final MunicipioData municipioData = municipioService.getMunicipioDataFromDocument( overPassResponse );
+				municipioService.printMunicipioData( municipioData, municipio.getNome() );
 			}
 		}
 		catch ( final IOException e )

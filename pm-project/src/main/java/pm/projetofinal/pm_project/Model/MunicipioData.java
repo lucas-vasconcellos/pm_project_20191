@@ -16,6 +16,28 @@ public class MunicipioData
 	 * <p>
 	 * </p>
 	 * 
+	 * @param aeroways
+	 * @param highways
+	 * @param ports
+	 * @param railways
+	 */
+	public MunicipioData(
+		final ArrayList<String> aeroways,
+		final ArrayList<String> highways,
+		final ArrayList<String> ports,
+		final ArrayList<String> railways )
+	{
+		super();
+		this.aeroways = aeroways;
+		this.highways = highways;
+		this.ports = ports;
+		this.railways = railways;
+	}
+
+	/**
+	 * <p>
+	 * </p>
+	 *
 	 * @return Returns the aeroways.
 	 * @see #aeroways
 	 */
@@ -27,7 +49,7 @@ public class MunicipioData
 	/**
 	 * <p>
 	 * </p>
-	 * 
+	 *
 	 * @return Returns the highways.
 	 * @see #highways
 	 */
@@ -39,7 +61,7 @@ public class MunicipioData
 	/**
 	 * <p>
 	 * </p>
-	 * 
+	 *
 	 * @return Returns the ports.
 	 * @see #ports
 	 */
@@ -51,7 +73,7 @@ public class MunicipioData
 	/**
 	 * <p>
 	 * </p>
-	 * 
+	 *
 	 * @return Returns the railways.
 	 * @see #railways
 	 */
@@ -63,7 +85,7 @@ public class MunicipioData
 	/**
 	 * <p>
 	 * </p>
-	 * 
+	 *
 	 * @param aeroways
 	 *            The aeroways to set.
 	 * @see #aeroways
@@ -76,7 +98,7 @@ public class MunicipioData
 	/**
 	 * <p>
 	 * </p>
-	 * 
+	 *
 	 * @param highways
 	 *            The highways to set.
 	 * @see #highways
@@ -89,7 +111,7 @@ public class MunicipioData
 	/**
 	 * <p>
 	 * </p>
-	 * 
+	 *
 	 * @param ports
 	 *            The ports to set.
 	 * @see #ports
@@ -102,7 +124,7 @@ public class MunicipioData
 	/**
 	 * <p>
 	 * </p>
-	 * 
+	 *
 	 * @param railways
 	 *            The railways to set.
 	 * @see #railways

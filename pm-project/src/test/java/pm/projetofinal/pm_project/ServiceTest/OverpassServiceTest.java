@@ -22,6 +22,12 @@ public class OverpassServiceTest {
 	MunicipioService municipioService = new MunicipioService();
 	OverpassService overpassService = new OverpassService();
 	
+	/**
+	 * Teste que verifica se o Document retornado da chamada da api do Overpass é valido
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	@Test
 	public void testGetOverpassDocument() throws ParserConfigurationException, SAXException, IOException
 	{

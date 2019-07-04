@@ -25,10 +25,9 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 public class MunicipioServiceTest {
 
 	
-	MunicipioService municipioService = new MunicipioService();
 	DomService domService = new DomService();
 	@Mock
-	MunicipioService municipioService1;
+	MunicipioService municipioService;
 	
 	final String MUNICIPIO_CODIGO = "3300605";
 	final boolean isCode = true;
@@ -39,7 +38,7 @@ public class MunicipioServiceTest {
 	@Before
 	public void setUp()
 	{
-		this.municipioService1 = Mockito.spy(new MunicipioService());
+		this.municipioService = Mockito.spy(new MunicipioService());
 	}
 
 	@Test
@@ -57,10 +56,10 @@ public class MunicipioServiceTest {
 	public void testGetMunicipio() throws Exception
 	{
 		
-		PowerMockito.whenNew(MunicipioService.class).withNoArguments().thenReturn(this.municipioService1);
+		PowerMockito.whenNew(MunicipioService.class).withNoArguments().thenReturn(this.municipioService);
 		NodeList nodeList = domService.getNodeListFromFile( xmlFile, MUNICIPIO_KML_TAG );
-		Municipio output = municipioService1.getMunicipioFromNodeList(nodeList, MUNICIPIO_CODIGO, isCode);
+		Municipio output = municipioService.getMunicipioFromNodeList(nodeList, MUNICIPIO_CODIGO, isCode);
 		Node node = nodeList.item(10);
-		verify(this.municipioService1, times(1)).getMunicipio(node);
+		verify(this.municipioService, times(1)).getMunicipio(node);
 	}
 }
